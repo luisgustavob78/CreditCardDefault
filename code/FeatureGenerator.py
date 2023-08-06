@@ -110,7 +110,7 @@ class DiffFeatures(BaseEstimator, TransformerMixin):
         for i in range(1, len(self.features)):
             a = self.features[i-1]
             b = self.features[i]
-            data[f"{b}_minus_{a}"] = b - a 
+            data[f"{b}_minus_{a}"] = data[b] - data[a] 
 
         return data
 
@@ -184,7 +184,7 @@ class GroupFeatures(BaseEstimator, TransformerMixin):
     
     def fit(self, X, y=None):
         self.X_group_mean, self.X_group_max, self.X_group_min = self.group_features(self.group_columns, self.features, X)
-        return self.X_group_mean, self.X_group_max, self.X_group_min
+        return self
                                     
     def transform(self, X):
                          
