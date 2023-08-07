@@ -202,11 +202,11 @@ class GroupFeatures(BaseEstimator, TransformerMixin):
 
 
 """
-==============================================================================
-Classe para selecionar as features finais que vão para o treinamento do modelo
-==============================================================================
+===============================================================
+Classe para dropar colunas que não serão utilizadas pelo modelo
+===============================================================
 
-Retorna um pandas dataframe com as colunas originais e as novas features calculadas.
+Retorna um pandas dataframe com as cvariáveis input do modelo.
 
 :: Parâmetros 
     ** features (requerido): list
@@ -215,17 +215,17 @@ Retorna um pandas dataframe com as colunas originais e as novas features calcula
 :: Exemplo:
 -----------
     #Inicialização
-    ff = FinalFeatures(features=["montante_pagamento_mes1", "montante_pagamento_mes2"])
+    dc = DropCols(features=["montante_pagamento_mes1", "montante_pagamento_mes2"])
 
     #fit
-    ff.fit(df_train)
+    dc.fit(df_train)
 
     #transform
-    df_train = ff.transform(df_train)
-    df_val = ff.transform(df_val)
-    df_test = ff.transform(df_test)
+    df_train = dc.transform(df_train)
+    df_val = dc.transform(df_val)
+    df_test = dc.transform(df_test)
 """
-class FinalFeatures(BaseEstimator, TransformerMixin):
+class DropCols(BaseEstimator, TransformerMixin):
 
     def __init__(self, features):
         self.features = features
@@ -235,6 +235,6 @@ class FinalFeatures(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         data = X.copy()
-        data = data[self.features]
+        data = data.drop(columns=self.features, axis=1)
 
         return data
