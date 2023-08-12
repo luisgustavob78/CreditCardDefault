@@ -52,7 +52,7 @@ def predict(credit: Credit):
     for c in cat_cols:
         df_batch[c] = df_batch[c].apply(negative_cat)
     
-    probs = clf.predict_proba(df_batch.batches)
+    probs = clf.predict_proba(df_batch)
     thr = 0.55
     pred = ["default" if v > thr else "good payment" for v in probs]
     
