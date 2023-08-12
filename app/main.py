@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import pandas as pd
+import FeatureGenerator as fg
 import joblib
 from typing import List
 from fastapi import FastAPI, File, UploadFile
