@@ -31,13 +31,27 @@ def home():
 def predict(credit: Credit):
     batches = credit.batches
     np_batches = np.array(batches)
+
     names = pd.read_csv("../inputs/col_names.csv")
     col_names = names["col_names"].values
     df_batch = pd.DataFrame(np_batches)
     df_batch.columns = col_names
 
-    probs = clf.predict_proba(df_batch.batches)
+    cat_cols = ['SEX', 'EDUCATION', 'MARRIAGE', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6']
+
+    def negative_cat(value):
+        if value < 0:
+            value = value*(-15)
+        
+        else:
+            pass
     
+        return value
+
+    for c in cat_cols:
+        df_batch[c] = df_batch[c].apply(negative_cat)
+    
+    probs = clf.predict_proba(df_batch.batches)
     thr = 0.55
     pred = ["default" if v > thr else "good payment" for v in probs]
     
