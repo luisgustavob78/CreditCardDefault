@@ -62,6 +62,7 @@ async def predict(file: UploadFile = File(...)):
         return value
 
     for c in cat_cols:
+        df_batch[c] = df_batch[c].astype("float")
         df_batch[c] = df_batch[c].apply(negative_cat)
     
     probs = clf.predict_proba(df_batch)
