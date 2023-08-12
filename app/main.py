@@ -17,7 +17,7 @@ app = FastAPI(title="Credit card default prediction! Upload your json batch")
 #     batches: List[conlist(item_type=float, min_items=24, max_items=24)]
 
 @app.post("/upload_json/")
-def upload_csv(file: UploadFile = File(...)):
+async def upload_csv(file: UploadFile = File(...)):
     global json_file
     contents = await file.read()
     json_file = contents.decode("utf-8")
