@@ -34,7 +34,7 @@ def home():
 
 
 @app.post("/predict")
-def predict(credit: Credit):
+def predict():
     batches = json_file.batches
     np_batches = np.array(batches)
 
