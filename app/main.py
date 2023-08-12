@@ -43,7 +43,7 @@ async def predict(file: UploadFile = File(...)):
     # Parse JSON content
     json_data = json.loads(contents)
 
-    np_batches = np.array(json_data["batches"])
+    np_batches = np.array(json_data["batches"], dtype=float)
 
     names = pd.read_csv("../inputs/col_names.csv")
     col_names = names["col_names"].values
@@ -62,7 +62,6 @@ async def predict(file: UploadFile = File(...)):
         return value
 
     for c in cat_cols:
-        df_batch[c] = df_batch[c].astype("float")
         df_batch[c] = df_batch[c].apply(negative_cat)
     
     probs = clf.predict_proba(df_batch)
