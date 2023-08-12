@@ -36,7 +36,7 @@ def predict(credit: Credit):
     df_batch = pd.DataFrame(np_batches)
     df_batch.columns = col_names
 
-    probs = model.predict_proba(df_batch.batches)
+    probs = clf.predict_proba(df_batch.batches)
     
     thr = 0.55
     pred = ["default" if v > thr else "good payment" for v in probs]
