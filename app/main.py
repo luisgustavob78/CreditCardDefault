@@ -43,7 +43,7 @@ async def predict(file: UploadFile = File(...)):
     # Parse JSON content
     json_data = json.loads(contents)
 
-    np_batches = np.array(json_file["batches"])
+    np_batches = np.array(json_data["batches"])
 
     names = pd.read_csv("../inputs/col_names.csv")
     col_names = names["col_names"].values
