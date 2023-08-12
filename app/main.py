@@ -16,11 +16,11 @@ app = FastAPI(title="Credit card default prediction! Upload your json batch")
 # class Credit(BaseModel):
 #     batches: List[conlist(item_type=float, min_items=24, max_items=24)]
 
-@app.post("/upload_json/")
-async def upload_csv(file: UploadFile = File(...)):
-    global json_file
-    contents = await file.read()
-    json_file = contents.decode("utf-8")
+# @app.post("/upload_json/")
+# async def upload_json(file: UploadFile = File(...)):
+#     global json_file
+#     contents = await file.read()
+#     json_file = contents.decode("utf-8")
 
 @app.on_event("startup")
 def load_clf():
@@ -34,9 +34,12 @@ def home():
 
 
 @app.post("/predict")
-def predict():
-    batches = json_file.batches
-    np_batches = np.array(batches)
+async def predict(file: UploadFile = File(...)):
+
+    contents = await file.read()
+    json_file = contents.decode("utf-8")
+
+    np_batches = np.array(json_file["batches"])
 
     names = pd.read_csv("../inputs/col_names.csv")
     col_names = names["col_names"].values
