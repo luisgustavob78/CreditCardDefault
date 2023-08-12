@@ -8,6 +8,7 @@ from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel, conlist
 import csv
 from io import StringIO
+import json
 
 
 app = FastAPI(title="Credit card default prediction! Upload your json batch")
@@ -37,7 +38,10 @@ def home():
 async def predict(file: UploadFile = File(...)):
 
     contents = await file.read()
-    json_file = contents.decode("utf-8")
+    contents = contents.decode("utf-8")
+
+    # Parse JSON content
+    json_data = json.loads(contents)
 
     np_batches = np.array(json_file["batches"])
 
