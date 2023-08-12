@@ -20,6 +20,7 @@ class Credit(BaseModel):
 @app.on_event("startup")
 def load_clf():
     # Load classifier from pickle file
+    global clf
     clf = joblib.load("../app/model.pkl")
 
 @app.get("/")
