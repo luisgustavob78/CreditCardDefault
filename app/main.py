@@ -27,7 +27,7 @@ app = FastAPI(title="Credit card default prediction! Upload your json batch")
 def load_clf():
     # Load classifier from pickle file
     global clf
-    clf = joblib.load("../app/model.pkl")
+    clf = joblib.load("model.pkl")
 
 @app.get("/")
 def home():
