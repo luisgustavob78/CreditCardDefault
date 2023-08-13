@@ -2,5 +2,6 @@ pandas==1.4.4
 scikit-learn
 lightgbm==3.3.5
 fastapi==0.101.0
+python-multipart
 pydantic==1.10.7
 uvicorn==0.23.2
