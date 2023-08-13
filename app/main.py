@@ -27,7 +27,7 @@ app = FastAPI(title="Credit card default prediction! Upload your json batch")
 def load_clf():
     # Load classifier from pickle file
     global clf
-    clf = joblib.load("model.pkl")
+    clf = joblib.load("/app/model.pkl")
 
 @app.get("/")
 def home():
@@ -45,7 +45,7 @@ async def predict(file: UploadFile = File(...)):
 
     np_batches = np.array(json_data["batches"], dtype=float)
 
-    names = pd.read_csv("../inputs/col_names.csv")
+    names = pd.read_csv("/inputs/col_names.csv")
     col_names = names["col_names"].values
     df_batch = pd.DataFrame(np_batches)
     df_batch.columns = col_names
