@@ -1,3 +1,4 @@
+python==3.9.13
 pandas==1.4.4
 numpy==1.21.5
 scikit-learn==1.0.2
