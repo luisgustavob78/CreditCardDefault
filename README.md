@@ -23,6 +23,8 @@ Make sure that you have all dependencies needed here:
 pip install requirements.txt
 ```
 
-### Example
-This is how the app looks like:
+### Using the app
+If you wanna try it out, select one of the json files stored in "batches" foldes and follow the gif:
 ![](https://github.com/luisgustavob78/CreditCardDefault/blob/main/gifs/credit_default_app.gif)
+
+The app can be found here: https://shorturl.at/bknR0
